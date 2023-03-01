@@ -1,0 +1,14 @@
+AMD64 SysV64 calling convention:
+    function argument registers: RDI, RSI, RDX, RCX, R8, R9, XMM0–7, additional arguments are stored RTL on stack
+
+    callee saved: RBX, RBP, R12–R15, it must restore their original values before returning control to the caller.
+    All other registers must be saved by the caller if it wishes to preserve their values.
+
+    Integral return values up to 64 bits in size are stored in RAX while values up to 128 bit are stored in RAX:RDX. 
+    Floating-point return values are similarly stored in XMM0 and XMM1.
+
+Kernel mode SysCall convention:
+    Syscall selector is in RAX
+    Function arguments: RDI, RSI, RDX, R10, R8, R9, No arguments are passed on the stack.
+    RCX and R11 are clobbered
+    SysCall result is returned in RAX, -4095 -> -1 indicates an error.
